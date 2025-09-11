@@ -1,6 +1,6 @@
 node_modules
-client/node_modules
 config
+client/node_modules
 nohup.out
 .DS_Store
 .env
