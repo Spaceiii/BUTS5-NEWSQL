@@ -3,9 +3,12 @@ const keys = require('./config/keys');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 require('./models/User');
 require('./models/Blog');
+require('./services/passport');
 
 mongoose.connect(keys.mongoURI)
 
@@ -20,6 +23,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json({ extended: true }));
+app.use(cookieSession({
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  keys: [keys.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // TODO SWAGGER DOC
 
