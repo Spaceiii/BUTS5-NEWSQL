@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 
 require('./models/User');
 require('./models/Blog');
+require('./models/Comment');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI)
@@ -29,8 +30,6 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-// TODO SWAGGER DOC
 
 require('./routes/authRoutes')(app);
 require('./routes/blogRoutes')(app);
